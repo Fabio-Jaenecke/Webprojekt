@@ -1,13 +1,13 @@
-/**
- * java script class for task object
- */
-var Task = function(title, done){
-	this.title = title;
-	this.done = done;
-	this.getTitle = function(){
-		return this.title;
-	};
-	this.isDone = function(){
-		return this.done;
-	};
-};
+let Task = function(title){
+    //Du willst kein task erstellen der schon angehakt ist :D
+    this.done = false;
+    this.title = title;
+}
+
+Task.prototype.check = function(){
+    this.done = true;
+}
+
+Task.prototype.uncheck = function(){
+    this.done = false;
+}
