@@ -9,7 +9,7 @@ describe('Tasklist', () => {
        });
        describe('add task', () => {
         it('should add a new task to the tasklist', () => {
-            taskList.tasks.addTask(new Task('task 5'));
+            taskList.addTask(new Task('task 5'));
             expect(taskList.tasks.length).toBe(5);
         });
        });
