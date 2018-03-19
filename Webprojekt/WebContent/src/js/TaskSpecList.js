@@ -15,7 +15,7 @@ describe('Tasklist', () => {
        });
 
        describe('remove taks', () => {
-           it('should remove a task from the tasklis', () => {
+           it('should remove a task from the tasklist', () => {
                taskList.tasks.splice(taskList.tasks[1], 1);
                expect(taskList.tasks.length).toBe(3);
            });
