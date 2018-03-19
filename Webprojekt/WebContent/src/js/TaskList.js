@@ -21,10 +21,10 @@ TaskList.prototype.removeTask = function(index){
 
 
 //For demonstration purpose 
-//let theTasks = new TaskList("the tasks");
-//const button = document.getElementById("addTask");
+let theTasks = new TaskList("the tasks");
+const button = document.getElementById("addTask");
 
-//button.addEventListener('click', function(){
-//    theTasks.addTask(new Task(false, 'kill garbage'));
-//    console.log(theTasks);
-//});
+button.addEventListener('click', function(){
+    theTasks.addTask(new Task(false, 'kill garbage'));
+    console.log(theTasks);
+});
