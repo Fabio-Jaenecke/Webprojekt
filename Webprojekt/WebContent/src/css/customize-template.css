@@ -7803,8 +7803,7 @@ body > #body-container {
   height: 100px;
   margin-top: -100px;
   clear: both;
-  position: absolute;
-  bottom: 0px;
+  position: relative;
 }
 .application-footer .container {
   padding-top: 5px;
