@@ -15,16 +15,10 @@ TaskList.prototype.uncheckTask = function(index){
 TaskList.prototype.removeTask = function(index){
     this.tasks.splice(index, 1);
 }
-
-//lambda function in js: this.addTask = task => taks.push(task);
-//let ist scope based, see difference const, let, var
-
-
-//For demonstration purpose 
-let theTasks = new TaskList("the tasks");
-const button = document.getElementById("addTask");
-
-button.addEventListener('click', function(){
-    theTasks.addTask(new Task(false, 'kill garbage'));
-    console.log(theTasks);
-});
+TaskList.prototype.render = function(){
+    var $markup;
+    this.tasks.forEach(function(task){
+        $markup += task.render();
+    });
+    return $markup;
+}

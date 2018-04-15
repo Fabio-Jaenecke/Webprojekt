@@ -1,5 +1,4 @@
 let Task = function(title){
-    //Du willst kein task erstellen der schon angehakt ist :D
     this.done = false;
     this.title = title;
 }
@@ -10,4 +9,12 @@ Task.prototype.check = function(){
 
 Task.prototype.uncheck = function(){
     this.done = false;
+}
+Task.prototype.render = function(){
+    var $markup = "<div> <input class='add-on' type='checkbox'";
+    if(this.done){
+        $markup += " checked";
+    }
+    $markup += "> <input class='span-4' type='text' value='" + this.title + "'></div>";
+    return $markup;
 }
