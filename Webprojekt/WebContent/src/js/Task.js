@@ -1,6 +1,7 @@
-let Task = function(title){
+let Task = function(title, id){
     this.done = false;
     this.title = title;
+    this.id = id
 }
 
 Task.prototype.check = function(){
@@ -15,6 +16,6 @@ Task.prototype.render = function(){
     if(this.done){
         $markup += " checked";
     }
-    $markup += "> <input class='span-4' type='text' value='" + this.title + "'></div>";
+    $markup += "> <input class='span-4' type='text' value='" + this.title + "' taskid='"+this.id+"'></div>";
     return $markup;
 }
