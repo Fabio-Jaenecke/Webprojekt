@@ -9,10 +9,15 @@ $(function(){
     $(".form-inner").append(tasklist.render());
 
     $( ".span-4" ).keypress(function(event) {
+        var taskId = tasklist.tasks[$(this).attr("taskid")];
         //Id 
         console.log($(this).attr("taskid"));
 
-        //Set title
+        //Remove Task, Create new one with Current Title 
+        tasklist.removeTask(taskId);
+        tasklist.addTask(new Task(event.target.value, taskId));
+
+        //Future Idea, to set new Title via 'setTitle' method
         console.log(tasklist.tasks[$(this).attr("taskid")])
 
         //Current Value
