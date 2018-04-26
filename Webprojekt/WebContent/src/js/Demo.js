@@ -1,5 +1,5 @@
 $(function(){
-    let tasklist = new TaskList("dinner");
+    var tasklist = new TaskList("dinner");
 
     tasklist.addTask(new Task("invite guests"));
     tasklist.addTask(new Task("buy vegetables"));
