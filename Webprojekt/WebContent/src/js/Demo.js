@@ -9,8 +9,15 @@ $(function(){
     $(".form-inner").append(tasklist.render());
 
     $( ".span-4" ).keypress(function(event) {
-        console.log(event.target);
-      });
+        //Id 
+        console.log($(this).attr("taskid"));
+
+        //Set title
+        console.log(tasklist.tasks[$(this).attr("taskid")])
+
+        //Current Value
+        console.log(event.target.value)
+    });
 
 
     $("#taskList").on("keydown change", "input",function(event) {

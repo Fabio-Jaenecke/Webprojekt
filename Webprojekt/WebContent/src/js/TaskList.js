@@ -3,6 +3,10 @@ let TaskList = function(title){
     this.tasks = [];
 }
 
+TaskList.prototype.setTitle = function(title, index){
+    this.task[index].title = title;
+}
+
 TaskList.prototype.addTask = function(task) {
    this.tasks.push(task);
 }

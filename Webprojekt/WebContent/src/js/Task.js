@@ -4,6 +4,10 @@ let Task = function(title, id){
     this.id = id
 }
 
+Task.prototype.setTitle = function(title){
+    this.title = title;
+}
+
 Task.prototype.check = function(){
     this.done = true;
 }
