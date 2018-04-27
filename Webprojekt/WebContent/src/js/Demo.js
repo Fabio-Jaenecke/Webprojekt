@@ -8,7 +8,8 @@ $(function(){
 
     $(".form-inner").append(tasklist.render());
 
-    // TODO either take this event handler or the one in taks.js
+    /* TODO either take this event handler or the one in taks.js
+    if other event handler is taken, we have to remove the id-property
     /*
     $( ".span-4" ).keypress(function(event) {
         var taskId = tasklist.tasks[$(this).attr("taskid")];
