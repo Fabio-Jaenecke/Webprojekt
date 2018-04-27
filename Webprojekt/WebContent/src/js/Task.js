@@ -15,11 +15,26 @@ Task.prototype.check = function(){
 Task.prototype.uncheck = function(){
     this.done = false;
 }
-Task.prototype.render = function(){
-    var $markup = "<div> <input class='add-on' type='checkbox'";
-    if(this.done){
-        $markup += " checked";
-    }
-    $markup += "> <input class='span-4' type='text' value='" + this.title + "' taskid='"+this.id+"'></div>";
-    return $markup;
-}
+
+Task.prototype.render = function() {
+  var _checked = this.done ? 'checked="checked"' : "";
+  var _title = this.title || "";
+  var $div = $("<div>");
+  var $checkbox =$("<input class='add-on' name='done' type='checkbox'" +  _checked + ">");
+  var $name = $("<input>", {name: 'title', 
+                            type: "text", 
+                            value: _title, 
+                            class: 'span-4'});
+  $div.append([$checkbox, $name]);
+  $div.data('task', this);
+
+  $checkbox.on("change",function(){
+    this.done = $(this).parent().data('task').title;
+  })
+
+  $name.on("key change",function(){
+    this.title = $(this).parent().data('task').title;
+  })
+
+  return $div;
+};

@@ -20,9 +20,10 @@ TaskList.prototype.removeTask = function(index){
     this.tasks.splice(index, 1);
 }
 TaskList.prototype.render = function(){
-    var $markup = "<ul>";
-    this.tasks.forEach(function(task){
-        $markup += task.render();
-    });
+    var $markup = $('<ul>');
+    var _i;
+    for (_i = 0; _i < this.tasks.length; _i += 1) {
+      $markup.append(this.tasks[_i].render());
+    }
     return $markup;
 }
