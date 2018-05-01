@@ -1,7 +1,6 @@
-let Task = function(title, id){
+let Task = function(title){
     this.done = false;
     this.title = title;
-    this.id = id
 }
 
 Task.prototype.setTitle = function(title){
