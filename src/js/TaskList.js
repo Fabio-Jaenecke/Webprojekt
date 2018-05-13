@@ -27,3 +27,6 @@ TaskList.prototype.render = function(){
     }
     return $markup;
 }
+TaskList.prototype.toJson = function(){
+    return JSON.stringify({title: this.title, tasks: this.tasks});
+}
