@@ -1,6 +1,7 @@
-let TaskList = function(title){
+let TaskList = function(title, id){
     this.title = title;
     this.tasks = [];
+    this.id = id || "";
 }
 
 TaskList.prototype.setTitle = function(title, index){

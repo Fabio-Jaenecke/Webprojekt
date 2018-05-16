@@ -30,6 +30,7 @@ Task.prototype.render = function() {
 
   $checkbox.on("change",function(){
     this.done = $(this).parent().data('task').title;
+    console.log("dieser task", this.done);
   })
 
   $name.on("key change",function(){

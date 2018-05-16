@@ -1,4 +1,4 @@
-$(function(){
+$(function () {
     var tasklist = new TaskList("dinner");
 
     tasklist.addTask(new Task("invite asd", 0));
@@ -8,7 +8,7 @@ $(function(){
 
     $(".form-inner").append(tasklist.render());
 
-    $( ".span-4" ).keypress(function(event) {
+    $(".span-4").keypress(function (event) {
         var taskId = tasklist.tasks[$(this).attr("taskid")];
         //Id 
         console.log($(this).attr("taskid"));
@@ -24,20 +24,37 @@ $(function(){
         console.log(event.target.value)
     });
 
+    $("#listForm").on("submit", function (eventelino) {
+        //To avoid page refresh
+        eventelino.preventDefault();
 
-    $("#taskList").on("keydown change", "input",function(event) {
- 
-        var type = $($(this)[0]).attr("type");
-        var current_task = $(this).parent().data("task");
-     alert(current_task);
-        if(type ==="text"){
-          current_task.title =  $(this).val();
-          $(this).parent().data("task",current_task);
-        }else{
-          current_task.done = $(this).is(":checked");
-          $(this).parent().data("task",current_task);
+        const input = $("#listTitle");
+        const listTitle = input.val();
+
+        //To empty form when submit
+        input.val("");
+
+        const task = TaskList(listTitle);
+        newTasklist(listTitle);
+
+    });
+
+    async function newTasklist(title) {
+        const res = await (await fetch("http://zhaw.herokuapp.com/task_lists/", {
+            method: "post",
+            body: JSON.stringify({ title })
+        })).json();
+
+        console.log(res);
+        const tasklist2 = new TaskList(title, res.id);
+        
+        let tasklists;
+        if (localStorage.getItem("tasklists")) {
+            tasklists = JSON.parse(localStorage.getItem("tasklists"));
+            tasklists.push(res.id);
+        } else {
+            tasklists = [res.id];
         }
-     
-        console.log("Dieser Task", $(this).parent().data("task"))
-      });
+        localStorage.setItem("tasklists", JSON.stringify(tasklists));
+    }
 });
