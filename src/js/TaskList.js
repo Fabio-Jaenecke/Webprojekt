@@ -1,7 +1,13 @@
+<<<<<<< HEAD:src/js/TaskList.js
 let TaskList = function(title, id){
     this.title = title;
     this.tasks = [];
     this.id = id || "";
+=======
+let TaskList = function(title){
+    this.title = title;
+    this.tasks = [];
+>>>>>>> 851bab06eb6d5f1bb3425e76c7cece36007cafd8:src/js/TaskList.js
 }
 
 TaskList.prototype.setTitle = function(title, index){

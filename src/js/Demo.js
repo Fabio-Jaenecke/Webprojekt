@@ -1,4 +1,3 @@
-//var jquery = require("jquery");
 
 $(function(){
     var tasklist = new TaskList("dinner");
@@ -32,4 +31,5 @@ $(function(){
         }
         localStorage.setItem("tasklists", JSON.stringify(tasklists));
     }
+
 });
