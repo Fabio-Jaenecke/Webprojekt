@@ -1,4 +1,3 @@
-
 $(function(){
     var tasklist = new TaskList("dinner");
 
