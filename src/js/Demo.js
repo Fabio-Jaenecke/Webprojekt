@@ -1,3 +1,4 @@
+
 $(function(){
     var tasklist = new TaskList("dinner");
 
@@ -15,12 +16,13 @@ $(function(){
     })
 
     async function newTasklist(title) {
-        const res = await (await fetch("http://zhaw.herokuapp.com/task_lists/", {
+        //erzeugt einen neuen task und speichert auf dem server
+        const res = await (await fetch("https://zhaw.herokuapp.com/task_lists/", {
             method: "post",
             body: JSON.stringify({ title })
         })).json();
-    console.log(res);
-        const tasklist2 = new TaskList(title, res.id);
+
+        //checkt ob es im local storage ist, sonnst erstellt es ein neues
         let tasklists;
         if (localStorage.getItem("tasklists")) {
             tasklists = JSON.parse(localStorage.getItem("tasklists"));
@@ -29,6 +31,13 @@ $(function(){
             tasklists = [res.id];
         }
         localStorage.setItem("tasklists", JSON.stringify(tasklists));
-    }
 
+        //holt sich tasks vom server
+        const promises = tasklists.map(async id => await (await fetch(`https://zhaw.herokuapp.com/task_lists/${id}`)).json());
+        const taskListsFromServer = await Promise.all([... promises]);        
+        $("#taskLists").empty();
+        taskListsFromServer.forEach(a => {
+            $("#taskLists").append("<li>" + a.title + "</li>");
+        })
+    }
 });
