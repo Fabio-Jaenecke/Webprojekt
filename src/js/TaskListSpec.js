@@ -1,4 +1,4 @@
-describe("Tasklist", () => {
+describe("Tasklist", function() {
   let taskList;
 
   beforeEach(() => {
@@ -24,21 +24,45 @@ describe("Tasklist", () => {
   });
 
   describe("renders tasklist to JSON", () => {
-
     it("rendered tasklist should not be null", () => {
-        expect(taskList.toJson()).not.toEqual(null);
+      expect(taskList.toJson()).not.toEqual(null);
     });
 
     it("rendered json should contain right title", () => {
-        expect(taskList.toJson()).toContain('"title":"new tasklist"');
+      expect(taskList.toJson()).toContain('"title":"new tasklist"');
     });
 
     it("rendered tasklist should contain a single task title", () => {
-        expect(taskList.toJson()).toContain('"title":"task 1"');
-    })
+      expect(taskList.toJson()).toContain('"title":"task 1"');
+    });
 
     it("rendered tasklist should contain checked property", () => {
-        expect(taskList.toJson()).toContain('"done":false');
-    })
+      expect(taskList.toJson()).toContain('"done":false');
+    });
+  });
+
+  describe("posts tasklist to server and receives id", () => {
+    beforeEach(() => {
+      spyOn($, "post").and.callFake(function(url, data, callback) {
+        callback(
+          JSON.stringify({
+            id: 5678,
+            title: "the list",
+            tasks: [
+              { title: "prepare diner", done: false },
+              { title: "invite guests", done: true }
+            ]
+          })
+        );
+      });
+
+      taskList.save();
+    });
+
+    it("should call save function", () => {
+      expect($.post).toHaveBeenCalled();
+    });
+
+    it("should set a new id", () => expect(taskList.id).toEqual(5678));
   });
 });
