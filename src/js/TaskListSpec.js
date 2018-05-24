@@ -65,4 +65,28 @@ describe("Tasklist", function() {
 
     it("should set a new id", () => expect(taskList.id).toEqual(5678));
   });
+
+  describe("load existing tasklist from server", () => {
+    beforeEach(() => {
+      spyOn($, "getJson").and.callFake(function(url, data, callback) {
+        callback(
+          JSON.stringify({
+            id: 5678,
+            title: "the list",
+            tasks: [
+              { title: "prepare diner", done: false },
+              { title: "invite guests", done: true }
+            ]
+          })
+        );
+      });
+
+      // execute a mocked ajax call and populate tasklist into result
+      TaskList.load("testlist", function(taskList) {
+        result = taskList;
+      });
+
+      //todo: write test cases
+    });
+  });
 });
