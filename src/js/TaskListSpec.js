@@ -85,8 +85,6 @@ describe("Tasklist", function() {
       TaskList.load("testlist", function(taskList) {
         result = taskList;
       });
-
-      //todo: write test cases
     });
   });
 });

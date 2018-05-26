@@ -34,44 +34,28 @@ TaskList.prototype.toJson = function() {
   return JSON.stringify(hash);
 };
 TaskList.prototype.save = function() {
-  var newId = 0;
+  var newId;
   if (this.id == undefined) {
-    $.post("http://zhaw.herokuapp.com/task_lists/", this.toJson());
-    this.id = 1;
-    console.log("the new id", this.id);
+    $.post("http://zhaw.herokuapp.com/task_lists/", this.toJson(), function(
+      data
+    ) {
+      newId = JSON.parse(data).id;
+      window.location.hash = newId;
+    });
+    this.id = newId;
   } else {
-    $.post(
-    "http://zhaw.herokuapp.com/task_lists/" + this.id, this.toJson());
-    newId = JSON.parse(this.id).id;
-    console.log("the new id", this.id);
-    this.id += 1; 
+    $.post("http://zhaw.herokuapp.com/task_lists/" + this.id, this.toJson());
+    window.location.hash = JSON.parse(data).id;
   }
 };
 
-TaskList.prototype.counter = function() {
-    window.location.hash = hashcounter + "expanded" + (hashcounter - 10) + "tasks";
-    hashcounter += 1;
-};
-
-
-
 TaskList.prototype.load = function() {
   let taskList;
-  var _k;
-  if (window.location.hash){
-        var index = window.location.hash.substring(1, 3);
-        for (_k = 10; _k < index; _k += 1) {
-          tasklist.addTask(new Task("Additional Task " + (_k - 9)));
-          /*TODO: Get the actual TASK (newID) instead of a placeholder - Konnte das nicht herausfinden. Der Task sollte ja jetzt im JSON gespeichert sein (wurde ja geparsed). Jetzt ist nur doch die Frage, wie wie diesen Task auslesen können.
-          */
-        }
-  };
-  $.getJSON("http://zhaw.herokuapp.com/task_lists/" + this.id,  function() {
+  $.getJSON("http://zhaw.herokuapp.com/task_lists/" + this.id, function() {
     taskList = JSON.parse(data);
     this.id = taskList.id;
     this.title = taskList.title;
     this.tasks = taskList.tasks;
     callback(taskList);
   });
-     
 };
