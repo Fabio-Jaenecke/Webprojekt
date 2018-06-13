@@ -37,7 +37,7 @@ TaskList.prototype.save = function (callback){
     var taskListScope = this;
     var url = "http://zhaw.herokuapp.com/task_lists/";
     if(this.id != undefined){ url += this.id; }
-    $.post("http://zhaw.herokuapp.com/task_lists/", this.toJson(), function(
+    $.post("https://zhaw.herokuapp.com/task_lists/", this.toJson(), function(
       data
     ) {
       taskListScope.id = JSON.parse(data).id;
