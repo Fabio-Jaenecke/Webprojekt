@@ -34,13 +34,11 @@ TaskList.prototype.toJson = function() {
   return JSON.stringify(hash);
 };
 TaskList.prototype.save = function (callback){
-    var taskListScope = this;
     var url = "http://zhaw.herokuapp.com/task_lists/";
     if(this.id != undefined){ url += this.id; }
-    $.post("https://zhaw.herokuapp.com/task_lists/", this.toJson(), function(
-      data
-    ) {
-      taskListScope.id = JSON.parse(data).id;
+    $.post("https://zhaw.herokuapp.com/task_lists/", this.toJson(), (data) =>
+      {
+      this.id = JSON.parse(data).id;
       window.location.hash = JSON.parse(data).id;
       console.log("ajax worked");
     });
