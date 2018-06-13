@@ -42,6 +42,7 @@ TaskList.prototype.save = function (callback){
     ) {
       taskListScope.id = JSON.parse(data).id;
       window.location.hash = JSON.parse(data).id;
+      console.log("ajax worked");
     });
 };
 
