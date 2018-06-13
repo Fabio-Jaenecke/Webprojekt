@@ -33,21 +33,29 @@ TaskList.prototype.toJson = function() {
   var hash = { title: this.title, tasks: this.tasks };
   return JSON.stringify(hash);
 };
-TaskList.prototype.save = function() {
-  var newId;
-  if (this.id == undefined) {
+TaskList.prototype.save = function (callback){
+    var taskListScope = this;
+    var url = "http://zhaw.herokuapp.com/task_lists/";
+    if(this.id != undefined){ url += this.id; }
     $.post("http://zhaw.herokuapp.com/task_lists/", this.toJson(), function(
       data
     ) {
-      newId = JSON.parse(data).id;
-      window.location.hash = newId;
+      taskListScope.id = JSON.parse(data).id;
+      window.location.hash = JSON.parse(data).id;
     });
-    this.id = newId;
-  } else {
-    $.post("http://zhaw.herokuapp.com/task_lists/" + this.id, this.toJson());
-    window.location.hash = JSON.parse(data).id;
-  }
 };
+
+TaskList.prototype.saveWithPromise = new Promise(function(resolve, reject){
+  if(this.id != undefined){ url += this.id; }
+    console.log("this scope in promise", this);
+    $.post("http://zhaw.herokuapp.com/task_lists/", "", function(
+      data
+    ) {
+      taskListScope.id = JSON.parse(data).id;
+      window.location.hash = JSON.parse(data).id;
+      resolve(JSON.parse(data).id);
+    });
+});
 
 TaskList.prototype.load = function() {
   let taskList;
