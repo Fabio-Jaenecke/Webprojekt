@@ -45,18 +45,6 @@ TaskList.prototype.save = function (callback){
     });
 };
 
-TaskList.prototype.saveWithPromise = new Promise(function(resolve, reject){
-  if(this.id != undefined){ url += this.id; }
-    console.log("this scope in promise", this);
-    $.post("http://zhaw.herokuapp.com/task_lists/", "", function(
-      data
-    ) {
-      taskListScope.id = JSON.parse(data).id;
-      window.location.hash = JSON.parse(data).id;
-      resolve(JSON.parse(data).id);
-    });
-});
-
 TaskList.prototype.load = function() {
   let taskList;
   $.getJSON("http://zhaw.herokuapp.com/task_lists/" + this.id, function() {

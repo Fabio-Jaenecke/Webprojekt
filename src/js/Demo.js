@@ -8,8 +8,6 @@ $(function() {
   tasklist.addTask(new Task("prepare food"));
   tasklist.addTask(new Task("do something"));
 
-  tasklist.save();
-
   $(".form-inner").append(tasklist.render());
 
   $("#addTask").on("click", function(event) {
@@ -20,6 +18,6 @@ $(function() {
 
   $("#saveTask").on("click", function(event) {
     console.log("save event received");
-    tasklist.saveWithPromise().then(results => {console.log("the resolved part", resolve)});
+    tasklist.save();
   });
 });
